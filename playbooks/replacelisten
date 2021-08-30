@@ -1,0 +1,20 @@
+---
+ - name: Examples of lineinfile
+   hosts: centos   
+   tasks:
+    - name: "Example1: Validate if a String or line is present in the file"
+      become: yes
+      become_user: root
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        # The String to Search
+        regexp: "^Listen [0-9]+" 
+        # The String to Replace
+        line: "Listen 8080"
+        state: present
+        backup: yes
+      register: replaceListen
+    - name : Restart  httpd
+      ansible.builtin.service:
+       name: httpd
+       state: restarted

@@ -1,0 +1,23 @@
+---
+- name: Create IIS site
+  hosts: windows
+  tasks:
+  - name: Remove Default Web Site
+    community.windows.win_iis_website:
+     name: "Default Web Site"
+     state: absent
+  - name: Create directory structure
+    ansible.windows.win_file:
+     path: C:\sites\testsite
+     state: directory 
+  - name: IIS site
+    community.windows.win_iis_website:
+      name: TestSite
+      state: started
+      port: 80
+      ip: '*'
+      hostname: '*'
+      application_pool: TestSite
+      physical_path: C:\sites\testsite
+      parameters: logfile.directory:C:\sites\logs
+    register: website

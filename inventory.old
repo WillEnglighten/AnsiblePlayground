@@ -1,0 +1,19 @@
+windows:
+ hosts:
+  realwin:
+   ansible_host: 192.168.56.101
+ vars:
+  ansible_user: administrator
+  ansible_password: 888Holdings
+  ansible_connection: winrm
+  ansible_winrm_server_cert_validation: ignore
+centos:
+ hosts:
+  osboxescentos:
+   ansible_host: 192.168.56.103
+ vars:
+   ansible_user: root
+   ansible_pass: osboxes.org
+   ansible_become: true 	
+   ansible_become_user: root
+   ansible_become_pass: osboxes.org

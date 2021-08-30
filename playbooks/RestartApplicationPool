@@ -1,0 +1,8 @@
+---
+- name: Restart an application pool (non-idempotent)
+  hosts: windows
+  tasks:
+  - name: restart AppPool
+    community.windows.win_iis_webapppool:
+      name: TestSite
+      state: restarted
